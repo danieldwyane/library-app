@@ -1,0 +1,49 @@
+<!-- <a mat-raised-button routerLink="create">Insertar libro</a> -->
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 books-table">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let book"> {{book.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Titulo </th>
+        <td mat-cell *matCellDef="let book"> {{book.title}} </td>
+    </ng-container>
+    <ng-container matColumnDef="anio">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let book"> {{book.year}} </td>
+    </ng-container>
+    <ng-container matColumnDef="numeropaginas">
+        <th mat-header-cell *matHeaderCellDef> Numero de Paginas </th>
+        <td mat-cell *matCellDef="let book"> {{book.pagesNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="genero">
+        <th mat-header-cell *matHeaderCellDef> Genero </th>
+        <td mat-cell *matCellDef="let book"> {{book.genre}} </td>
+    </ng-container>
+    <ng-container matColumnDef="editorial">
+        <th mat-header-cell *matHeaderCellDef> Editorial </th>
+        <td mat-cell *matCellDef="let book"> {{book.editorial}} </td>
+    </ng-container>
+    <ng-container matColumnDef="autor">
+        <th mat-header-cell *matHeaderCellDef> Autor </th>
+        <td mat-cell *matCellDef="let book"> {{book.author}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let book"> 
+            <a mat-raised-button [routerLink]="['edit', book.id]">Editar</a>
+            <button mat-raised-button color="warn" (click)="deleteQuestion(book.id)">Eliminar</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+</table>
